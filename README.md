@@ -120,8 +120,6 @@ python main.py
 1. File Management
 2. System Tools
 3. Pranks
-4. Authentication
-5. Exit
 Choose an option:
 ```
 
