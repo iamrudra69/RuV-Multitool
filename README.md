@@ -1,177 +1,156 @@
-# 🔧 RuV-Multitool-v1
+# 🚀 RuV-Multitool-v1
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
-[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-green)]()
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-> ⚙️ A modular, menu-driven Python utility that combines system tools, file operations, user authentication, and fun prank features — all in one place!
+**RuV-Multitool-v1** is a powerful, modular, menu-driven terminal utility written in Python. It offers essential system tools, file management utilities, user authentication, and even prank features—all wrapped in a clean and engaging terminal UI.
 
 ---
 
-## 📚 Table of Contents
+## 🧠 Features at a Glance
 
-- [🧠 Features](#-features)
-- [📂 Project Structure](#-project-structure)
-- [⚙️ Installation & Usage](#️-installation--usage)
-- [▶️ How to Run](#️-how-to-run)
-- [🎬 Preview](#-preview)
-- [🛠 Customization](#-customization)
-- [💡 Future Improvements](#-future-improvements)
-- [🙋‍♂️ Author](#-author)
-- [📄 License](#-license)
+### 🔐 Authentication
+- **Register new users** with username/password
+- **Secure login system**
+- **Change password** functionality
+- All data handled locally (ideal for demos and internal tools)
+
+### 📁 File Management
+- **Rename files** easily via the interface
+- **Download files** from a specified path or location
+- Designed to be expandable (move, delete, zip etc. possible in future versions)
+
+### 🖥️ System Utilities
+- Get **Hostname and IP Address**
+- Detect **CPU architecture**
+- Check **Current Logged-in User**
+- Extendable with more system functions (disk info, memory usage, etc.)
+
+### 🎭 Prank Tools (For Fun)
+- **Rotate Screen** (on compatible OS)
+- **Play Random Sounds** from assets
+- **Keyboard Glitch Prank**
+- **CMD Window Overload** (for jokes only!)
+> ⚠️ Use prank tools responsibly. They are for entertainment, not harm.
+
+### 📋 Interactive Menus
+- ASCII-styled UI with vibrant colors and icons
+- Intuitive menus with back/exit shortcuts
+- Designed for ease of navigation
 
 ---
 
-## 🧠 Features
+## 🖼️ Screenshots
 
-### ✅ General
-- Modular, menu-based interface
-- Intuitive terminal interaction
-- Easily extensible with new modules
+### 🔐 Authentication Menu
+![1](https://github.com/user-attachments/assets/ec2bc837-5a08-4530-9aeb-48722277b282)
 
-### 🔐 Authentication (`Auth.py`)
-- Username/password login system
-- Ideal for demos, local tools, or parental control
+### 🔓 Login Success
+![2](https://github.com/user-attachments/assets/98028dd1-370b-47f0-91a8-d68b9b0eaaac)
 
-### 📁 File Management (`Files.py`)
-- Create, read, and delete files
-- Secure file handling with user prompts
+### 🧩 Selection Menu (Main Tools)
+![3](https://github.com/user-attachments/assets/4c7c4899-d0cd-4800-968b-ac7433cc8e97)
 
-### 🖥️ System Tools (`System.py`)
-- View OS, CPU, and platform info
-- Extendable to add network or memory tools
+### 📁 File Operations Menu
+![4](https://github.com/user-attachments/assets/28e05411-59d7-41f7-b49a-4a8d14c6fb59)
 
-### 🎉 Pranks (`Pranks.py`)
-- Play sound effects (`.mp3`/`.wav`)
-- Perfect for harmless jokes with friends
+### 🤪 Pranks Menu (For Fun)
+![5](https://github.com/user-attachments/assets/633e58f6-bc2b-4285-af97-955bbe028eba)
 
-### 🧩 Menu System (`SelectionMenu.py`)
-- Centralized script navigation
-- Smooth user flow with categorized options
+### 🖥️ System Information Menu
+![6](https://github.com/user-attachments/assets/803402d4-e049-4633-a2e4-b8f163d741f7)
+
+
+---
+
+## 🛠️ How It Works
+
+The core of **RuV-Multitool-v1** is modular. Each tool is stored in its own `.py` file and imported through a unified menu system (`SelectionMenu.py`). This makes it easy to maintain or expand.
+
+### ✅ Program Flow
+1. Launch `main.py`
+2. Authenticate (register/login)
+3. Access main menu
+4. Navigate to File, System, or Pranks
+5. Perform actions
+6. Exit or return
 
 ---
 
 ## 📂 Project Structure
 
-<details>
-<summary>📁 <strong>Click to Expand: Project Directory Tree</strong></summary>
-
-```text
+```bash
 RuV-Multitool-v1/
-│
 ├── Multitool/
-│   ├── assets/               # Sound files for pranks
-│   ├── AppBuildCommand.txt   # Build/run instructions
-│   ├── Auth.py               # Login system
-│   ├── Files.py              # File utilities
-│   ├── Functions.py          # Shared helper functions
-│   ├── Pranks.py             # Sound pranks
-│   ├── SelectionMenu.py      # Menu system
-│   ├── System.py             # System info
-│   └── main.py               # Entry point
-│
-├── icon/                     # App icons (for .exe or GUI)
-├── README.md                 # Project documentation
-└── LICENSE                   # MIT License
+│   ├── assets/              # Sound files for pranks
+│   ├── AppBuildCommand.txt  # Build/run instructions
+│   ├── Auth.py              # Login system
+│   ├── Files.py             # File utilities
+│   ├── Functions.py         # Shared functions
+│   ├── Pranks.py            # Sound pranks
+│   ├── SelectionMenu.py     # Menu system
+│   ├── System.py            # System info
+│   └── main.py              # Entry point
+├── icon/                    # App icons (for .exe or GUI)
+├── README.md                # This file
+└── LICENSE                  # MIT License
 ```
 
-</details>
-
 ---
 
-## ⚙️ Installation & Usage
+## ⚙️ Installation Guide
 
-### 🔽 Prerequisites
+### Requirements
 
-- **Python 3.8+**  
-- **pip** installed
-- For pranks:
-  ```bash
-  pip install playsound  # Or pygame if you use that
-  ```
+- Python 3.8 or higher
+- OS: Windows, Linux, macOS (Windows recommended for full prank support)
 
----
+### Steps
 
-## ▶️ How to Run
+1. Clone the repo:
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/iamrudra69/RuV-Multitool-v1.git
-
-# 2. Navigate into the project
 cd RuV-Multitool-v1/Multitool
+```
 
-# 3. Run the main program
+2. Install dependencies:
+
+```bash
+pip install playsound pyfiglet termcolor
+```
+
+3. Run the tool:
+
+```bash
 python main.py
 ```
 
-> 💡 Make sure your Python environment supports sound playback (on Windows, macOS, or Linux).
+---
+
+## 🧪 Planned Features
+
+- GUI Version using **Tkinter** or **PyQt**
+- Logging system (debug + user logs)
+- Password encryption & hash storage
+- Add file zip/delete/move features
+- GUI-based prank control
+- `.exe` builder integration for 1-click run
 
 ---
 
-## 🎬 Preview
+## 📜 License
 
-> **Here’s a sneak peek of the terminal interface:**
+This project is licensed under the **MIT License**. You're free to use, modify, and distribute this software with proper credit.
 
-```
-=======================
-   RuV-Multitool-v1
-=======================
-1. File Management
-2. System Tools
-3. Pranks
-Choose an option:
-```
-
-![Preview GIF or Screenshot](icon/demo.gif) <!-- Replace with actual screenshot path -->
+📄 [View Full License](./LICENSE)
 
 ---
 
-## 🛠 Customization
+## 🙋‍♂️ Author & Credits
 
-### 🧩 Adding New Tools
-- Create a new Python file in `Multitool/` (e.g. `MyTool.py`)
-- Import it in `SelectionMenu.py`
-- Add a new option in the menu and link your function
+Developed by [@iamrudra69](https://github.com/iamrudra69) — contributions welcome!
 
-### 🎵 Changing Prank Sounds
-- Replace files in the `assets/` folder with your custom `.wav` or `.mp3`
-- Update filenames in `Pranks.py` if necessary
-
-### 🖼 GUI Version (Coming Soon!)
-- Planned support for tkinter and PyQt
-- Icons in `icon/` can be used for GUI buttons or packaging
+> ASCII banners powered by **pyfiglet**  
+> Colorful CLI interface using **termcolor**
 
 ---
 
-## 💡 Future Improvements
-
-✅ Planned Features:
-
-- [ ] GUI interface using **tkinter** or **PyQt**
-- [ ] Add **network tools** (ping, IP lookup, etc.)
-- [ ] Improve **password encryption**
-- [ ] Add **logging and debugging** tools
-- [ ] Package into `.exe` and `.apk` via `AppBuildCommand.txt`
-
----
-
-## 🙋‍♂️ Author
-
-Built with 💻 and 🎧 by [**iamrudra69**](https://github.com/iamrudra69)  
-If you like this project, ⭐️ star it, fork it, or share it!
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License**.
-
-You are free to use, modify, and distribute it with attribution.
-
-See [LICENSE](LICENSE) for details.
-
----
-
-**🚀 Enjoy using RuV-Multitool-v1!**  
-Got ideas? Contributions and feedback are always welcome.
+If you enjoy using this project, ⭐️ the repo or share your ideas for improvements!
