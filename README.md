@@ -1,6 +1,6 @@
-# 🚀 RuV-Multitool-v1
+# 🚀 RuV-Multitool
 
-**RuV-Multitool-v1** is a powerful, modular, menu-driven terminal utility written in Python. It offers essential system tools, file management utilities, user authentication, and even prank features—all wrapped in a clean and engaging terminal UI.
+**RuV-Multitool** is a powerful, modular, menu-driven terminal utility written in Python. It offers essential system tools, file management utilities, user authentication, and even prank features—all wrapped in a clean and engaging terminal UI.
 
 ---
 
