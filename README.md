@@ -40,23 +40,22 @@
 ## 🖼️ Screenshots
 
 ### 🔐 Authentication Menu
-![1](https://github.com/user-attachments/assets/ec2bc837-5a08-4530-9aeb-48722277b282)
+<img width="1069" height="571" alt="1" src="https://github.com/user-attachments/assets/30c6df36-ddc8-468f-aba3-537671405651" />
 
 ### 🔓 Login Success
-![2](https://github.com/user-attachments/assets/98028dd1-370b-47f0-91a8-d68b9b0eaaac)
+<img width="1069" height="571" alt="2" src="https://github.com/user-attachments/assets/a504a41b-bc2e-4d2b-942c-884286a201c2" />
 
 ### 🧩 Selection Menu (Main Tools)
-![3](https://github.com/user-attachments/assets/4c7c4899-d0cd-4800-968b-ac7433cc8e97)
+<img width="1069" height="571" alt="3" src="https://github.com/user-attachments/assets/9474b8af-4380-45d6-8493-1365355c1c55" />
 
 ### 📁 File Operations Menu
-![4](https://github.com/user-attachments/assets/28e05411-59d7-41f7-b49a-4a8d14c6fb59)
+<img width="1069" height="571" alt="4" src="https://github.com/user-attachments/assets/f960fe0c-b4f0-45b5-ac31-73aa14a7c357" />
 
 ### 🤪 Pranks Menu (For Fun)
-![5](https://github.com/user-attachments/assets/633e58f6-bc2b-4285-af97-955bbe028eba)
+<img width="1069" height="571" alt="5" src="https://github.com/user-attachments/assets/53cbe053-fe7f-434f-81a5-0fe73235d187" />
 
 ### 🖥️ System Information Menu
-![6](https://github.com/user-attachments/assets/803402d4-e049-4633-a2e4-b8f163d741f7)
-
+<img width="1069" height="571" alt="6" src="https://github.com/user-attachments/assets/d9ee9a6f-c723-45db-8f11-51043b38e21b" />
 
 ---
 
@@ -146,7 +145,7 @@ This project is licensed under the **MIT License**. You're free to use, modify, 
 
 ## 🙋‍♂️ Author & Credits
 
-Developed by [@iamrudra69](https://github.com/iamrudra69) — contributions welcome!
+Developed by [@VoldRax](https://github.com/VoldRax) — contributions welcome!
 
 > ASCII banners powered by **pyfiglet**  
 > Colorful CLI interface using **termcolor**
