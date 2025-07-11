@@ -65,7 +65,7 @@ def registerUser():
 
     try:
         client = pym.MongoClient(dbAddress)
-        database = client["RuVMultitoolv1"]
+        database = client["RuV_Tools"]
         collection = database["Auth"]
         document = collection.find_one({"username": username})
 
@@ -111,7 +111,7 @@ def loginUser():
 
     try:
         client = pym.MongoClient(dbAddress)
-        database = client["RuVMultitoolv1"]
+        database = client["RuV_Tools"]
         collection = database["Auth"]
         document = collection.find_one({"username": username, "password": password})
 
@@ -156,7 +156,7 @@ def changePassword():
 
     try:
         client = pym.MongoClient(dbAddress)
-        database = client["RuVMultitoolv1"]
+        database = client["RuV_Tools"]
         collection = database["Auth"]
         document = collection.find_one(
             {"username": username, "password": oldPasswordHash}
