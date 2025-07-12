@@ -15,6 +15,7 @@
 ### 📁 File Management
 - **Rename files** easily via the interface
 - **Download files** from a specified path or location
+- **Search files** from a folder with extensions
 - Designed to be expandable (move, delete, zip etc. possible in future versions)
 
 ### 🖥️ System Utilities
