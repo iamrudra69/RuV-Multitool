@@ -50,7 +50,7 @@
 <img width="1069" height="571" alt="3" src="https://github.com/user-attachments/assets/9474b8af-4380-45d6-8493-1365355c1c55" />
 
 ### 📁 File Operations Menu
-<img width="1069" height="571" alt="4" src="https://github.com/user-attachments/assets/f960fe0c-b4f0-45b5-ac31-73aa14a7c357" />
+<img width="1115" height="628" alt="4" src="https://github.com/user-attachments/assets/b0814e7f-7344-4266-8de0-7edc8dd3f722" />
 
 ### 🤪 Pranks Menu (For Fun)
 <img width="1069" height="571" alt="5" src="https://github.com/user-attachments/assets/53cbe053-fe7f-434f-81a5-0fe73235d187" />
