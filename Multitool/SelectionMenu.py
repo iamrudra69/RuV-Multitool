@@ -1,7 +1,7 @@
-from Functions import interface
-from Files import fileMenu
-from Pranks import prankMenu
-from System import systemInfoMenu
+from functions import interface
+from files import fileMenu
+from pranks import prankMenu
+from system import systemInfoMenu
 
 menuOptions = "[1] File Operations 📂\n[2] Pranks 🤡\n[3] System Information 💻"
 

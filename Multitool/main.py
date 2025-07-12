@@ -1,5 +1,5 @@
-from Auth import authMenu
-from SelectionMenu import selectionMenu
+from auth import authMenu
+from selectionMenu import selectionMenu
 
 def main():
 
@@ -8,4 +8,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

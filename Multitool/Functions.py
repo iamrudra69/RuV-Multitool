@@ -13,10 +13,23 @@ def setWindowName():
     else:
         os.system("echo -ne '\033]0;RuV Tools\007'")
 
-
 def cls():
     os.system("cls" if os.name == "nt" else "clear")
 
+def inputColor(text):
+    return '\033[1;36m' + text + '\033[0m'
+
+def outputColor(text):
+    return '\033[32m' + text + '\033[0m'
+
+def errorColor(text): # Error color or warning color --> red for both
+    return '\033[1;31m' + text + '\033[0m'
+
+def menuLine():
+    print(f"\033[1;33m=========================\033[0m")
+
+def outputLine():
+    print(f"\033[1;95m=========================\033[0m")
 
 def printLogo():
     logo = """\033[38;2;226;255;12m\t▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌
@@ -40,7 +53,6 @@ def printLogo():
                                                                                            """
     print(logo)
 
-
 def checkChoice(choice):
 
         if choice == b"\x1b":  # Escape key
@@ -55,7 +67,6 @@ def checkChoice(choice):
                 time.sleep(1)
             exit(0)
 
-
 def confirm(prompt):
 
     print(f"\033[1;33m{prompt} (y/n):\033[0m ", end='', flush=True)
@@ -65,7 +76,6 @@ def confirm(prompt):
             return True
         elif response == b'n':
             return False
-
 
 def exitProgram():
     if confirm("\n\033[1;33mDo you want to exit the tool?\033[0m"):       
@@ -80,13 +90,11 @@ def exitProgram():
         print(f"\n\033[1;31m[INFO]\033[0m \033[31mOperation Cancelled by the user.\033[0m")
         msvcrt.getch()
 
-
 def handleInvalidChoice():
 
     print(f"\033[1;31m[ERROR]\033[0m \033[31mInvalid choice. Try again.\033[0m")
     print(f"\n\033[38;5;45mPress any key to return to the main menu...\033[0m")
     msvcrt.getch()
-
 
 def handleBackspace(menuName):
 
@@ -141,14 +149,14 @@ def interface(menuName, menuOptions, *functions):
         print(f"\033[1;33mWelcome to the {menuNameDisplay}!\033[0m")
         if menuName.lower() == "pranks":
             print(f"\033[1;31mDisclaimer : We are not responsible for any loss of data or the system\033[0m")
-        print(f"\033[1;33m=========================\033[0m")
+        menuLine()
 
         # Print each menu option in green
         for line in menuOptions.strip().split('\n'):
-            print(f"\033[32m{line}\033[0m")
+            print(f"{outputColor(line)}")
 
-        print(f"\033[1;33m=========================\033[0m")
-        print(f"\033[38;5;208m[INFO]\033[0m \033[32mPress ESC to exit the program, or Backspace to go back. \033[0m")
+        menuLine()
+        print(f"\033[38;5;208m[INFO]\033[0m {outputColor("Press ESC to exit the program, or Backspace to go back. \033[0m")}")
 
         choice = msvcrt.getch()
 
