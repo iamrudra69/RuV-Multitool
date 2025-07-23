@@ -2,6 +2,7 @@ import os
 import time
 import msvcrt
 import ctypes
+import getpass
 
 def setWindowName():
     if os.name == "nt":
@@ -28,7 +29,7 @@ def errorColor(text): # Error color or warning color --> red for both
 def menuLine():
     print(f"\033[1;33m=========================\033[0m")
 
-def outputLine():
+def line():
     print(f"\033[1;95m=========================\033[0m")
 
 def printLogo():
@@ -106,7 +107,7 @@ def handleBackspace(menuName):
     if menuName.lower() == "auth":
         exitProgram()
 
-    if menuName.lower() == "files" or menuName.lower() == "pranks" or menuName.lower() == "system_info":
+    if menuName.lower() == "basic_operations" or menuName.lower() == "files" or menuName.lower() == "pranks" or menuName.lower() == "system_info":
         
         if confirm("\n\033[1;33mDo you want to return to the previous menu?\033[0m"):
             print(f"\n\033[1;33m[INFO]\033[0m \033[33mReturning to the previous menu...\033[0m")
@@ -117,7 +118,6 @@ def handleBackspace(menuName):
             print(f"\n\033[1;33m[INFO]\033[0m \033[33mStaying in current menu...\033[0m")
             time.sleep(1)
             return False  # Stay in the loop
-
 
 def interface(menuName, menuOptions, *functions):
 
@@ -142,6 +142,8 @@ def interface(menuName, menuOptions, *functions):
                 menuNameDisplay = "Pranks Menu"
             case "system_info":
                 menuNameDisplay = "System Menu"
+            case "basic_operations":
+                menuNameDisplay = "Basic Operations Menu" 
             
 
         cls()

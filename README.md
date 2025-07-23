@@ -12,6 +12,12 @@
 - **Change password** functionality
 - All data handled locally (ideal for demos and internal tools)
 
+### 🕹️ Basic Operations Menu
+- **Get Exhange Rate** exchange rate for currency in real time
+- **Password Generator** creates a password upon the given limit
+- **Timer** a interactive timer  
+- Real Time data conversion through APIs
+
 ### 📁 File Management
 - **Rename files** easily via the interface
 - **Download files** from a specified path or location
@@ -49,6 +55,9 @@
 ### 🧩 Selection Menu (Main Tools)
 <img width="1069" height="571" alt="3" src="https://github.com/user-attachments/assets/9474b8af-4380-45d6-8493-1365355c1c55" />
 
+### 🕹️ Basic Operations Menu
+
+
 ### 📁 File Operations Menu
 <img width="1115" height="628" alt="4" src="https://github.com/user-attachments/assets/b0814e7f-7344-4266-8de0-7edc8dd3f722" />
 
@@ -68,7 +77,7 @@ The core of **RuV-Multitool-v1** is modular. Each tool is stored in its own `.py
 1. Launch `main.py`
 2. Authenticate (register/login)
 3. Access main menu
-4. Navigate to File, System, or Pranks
+4. Navigate to Basic, File, System, or Pranks
 5. Perform actions
 6. Exit or return
 
@@ -81,12 +90,13 @@ RuV-Multitool-v1/
 ├── Multitool/
 │   ├── assets/              # Sound files for pranks
 │   ├── AppBuildCommand.txt  # Build/run instructions
-│   ├── Auth.py              # Login system
-│   ├── Files.py             # File utilities
-│   ├── Functions.py         # Shared functions
-│   ├── Pranks.py            # Sound pranks
-│   ├── SelectionMenu.py     # Menu system
-│   ├── System.py            # System info
+│   ├── auth.py              # Login system
+│   ├── basicMenu.py         # Basic Operations like currency converter, password generator
+│   ├── files.py             # File utilities
+│   ├── functions.py         # Shared functions
+│   ├── pranks.py            # Sound pranks
+│   ├── selectionMenu.py     # Menu system
+│   ├── system.py            # System info
 │   └── main.py              # Entry point
 ├── icon/                    # App icons (for .exe or GUI)
 ├── README.md                # This file

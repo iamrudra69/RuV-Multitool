@@ -1,15 +1,17 @@
 import os 
 import requests
 import pathlib
+import csv
+import json
 
-from functions import interface, inputColor, outputColor, errorColor, outputLine
+from functions import interface, inputColor, outputColor, errorColor, line
 
-menuOptions = "[1] Rename Files 📂\n[2] Download File 📥\n[3] Search Files 🔍"
+menuOptions = "[1] Rename Files 📂\n[2] Download File 📥\n[3] Search Files 🔍\n[4] Convert CSV to JSON 🔄"
 
 def renameFiles():
     try:
         print(outputColor("This feature renames the files ✏️"))
-        outputLine()
+        line()
         path = input(inputColor("Enter the directory path to rename files (default: current directory) 📁 : ")).strip() or os.getcwd()
 
         if not os.path.isdir(path):
@@ -28,7 +30,7 @@ def renameFiles():
 
         newNames = input(inputColor("Enter new file names (comma-separated, leave empty for auto-indexing) 🔠 : ")).strip().split(',')
         newNames = [name.strip() for name in newNames if name.strip()]
-        outputLine()
+        line()
 
         if not oldNames:
             oldNames = files
@@ -76,23 +78,23 @@ def renameFiles():
 
     except KeyboardInterrupt:
         print("\n")
-        outputLine()
+        line()
         print(errorColor("⛔ Operation cancelled by user. 🛑"))
 
     except Exception as e:
         print("\n")
-        outputLine()
+        line()
         print(errorColor(f"❌ Unexpected error occurred: {e} 🚨"))
 
 def downloadFile():
     try:
         print(outputColor("This feature downloads the file or the HTML of the given URL 🌐"))
-        outputLine()
+        line()
 
         url      = input(inputColor("Enter the URL of the file to download 🌍 : ")).strip()
         filename = input(inputColor("Enter the filename to save as (with extension) 💾 : ")).strip()
         folder   = input(inputColor("Enter the folder path to save the file (leave empty for Downloads) 📂 : ")).strip()
-        outputLine()
+        line()
 
         if not url.startswith("http://") and not url.startswith("https://"):
             print(errorColor("Invalid URL. Please provide a valid HTTP or HTTPS URL ❗🌐"))
@@ -128,12 +130,12 @@ def downloadFile():
 
     except KeyboardInterrupt:
         print("\n")
-        outputLine()
+        line()
         print(errorColor("⛔ Operation cancelled by user. 🛑"))
 
     except Exception as e:
         print("\n")
-        outputLine()
+        line()
         print(errorColor(f"❌ Unexpected error occurred: {e} 🚨"))
 
 def searchFiles():
@@ -161,14 +163,42 @@ def searchFiles():
 
     except KeyboardInterrupt:
         print("\n")
-        outputLine()
+        line()
         print(errorColor("⛔ Operation cancelled by user. 🛑"))
 
     except Exception as e:
         print("\n")
-        outputLine()
+        line()
         print(errorColor(f"❌ Unexpected error occurred: {e} 🚨"))
 
+def convertCSVtoJSON():
+
+    line()
+    csvPath = input(inputColor("Enter the path to the CSV file 📁 : ")).strip()
+    output_dir = input(inputColor("Enter the output directory for JSON (leave blank to use same directory as CSV) 📁 : ")).strip()
+    output_dir = output_dir if output_dir else None
+
+    # 🔧 Generate JSON filename and path
+    baseName = os.path.splitext(os.path.basename(csvPath))[0]
+    jsonFilename = baseName + '.json'
+    
+    jsonPath = os.path.join(output_dir or os.path.dirname(csvPath), jsonFilename)
+
+    line()
+
+    # 📤 Convert CSV to JSON
+    try:
+        with open(csvPath, mode='r', encoding='utf-8') as csv_file:
+            reader = csv.DictReader(csv_file)
+            rows = list(reader)
+
+        with open(jsonPath, mode='w', encoding='utf-8') as json_file:
+            json.dump(rows, json_file, indent=4)
+
+        print(outputColor(f"JSON file created successfully at : {jsonPath} ✅"))
+    
+    except Exception as e:
+        print(errorColor(f"Conversion failed ❌ : {e} "))
 
 def fileMenu():
-    interface("Files", menuOptions, renameFiles, downloadFile, searchFiles)
+    interface("Files", menuOptions, renameFiles, downloadFile, searchFiles, convertCSVtoJSON)

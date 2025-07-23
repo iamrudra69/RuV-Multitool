@@ -1,0 +1,37 @@
+[
+    {
+        "Name": "Jotaro Kujo",
+        "Stand": "Star Platinum",
+        "Power Level": "9000",
+        "Affinity": "Time",
+        "Awakened": "Yes"
+    },
+    {
+        "Name": "Dio Brando",
+        "Stand": "The World",
+        "Power Level": "9500",
+        "Affinity": "Space-Time",
+        "Awakened": "Yes"
+    },
+    {
+        "Name": "Joseph Joestar",
+        "Stand": "Hermit Purple",
+        "Power Level": "6000",
+        "Affinity": "Spirit",
+        "Awakened": "No"
+    },
+    {
+        "Name": "Giorno Giovanna",
+        "Stand": "Gold Experience",
+        "Power Level": "8800",
+        "Affinity": "Life",
+        "Awakened": "Yes"
+    },
+    {
+        "Name": "Josuke Higashikata",
+        "Stand": "Crazy Diamond",
+        "Power Level": "8300",
+        "Affinity": "Restoration",
+        "Awakened": "No"
+    }
+]

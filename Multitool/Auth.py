@@ -4,7 +4,7 @@ import hashlib
 import time
 import string
 
-from functions import interface, inputColor, outputColor, errorColor, outputLine
+from functions import interface, inputColor, outputColor, errorColor, line
 
 menuOptions = "[1] Register User 📝\n[2] Login 🔑\n[3] Change Password 🔄"
 dbAddress   = "mongodb://localhost:27017/"
@@ -14,42 +14,42 @@ def hashPassword(password):
 
 def registerUser():
     try:
-        outputLine()
+        line()
         username = input(inputColor("Enter your username 🧑‍💻 : ")).lower()
         passW    = getpass.getpass(inputColor("Enter your password 🔒 : "))
 
         if not username or not passW:
-            outputLine()
+            line()
             print(errorColor("Username or Password cannot be empty ❗"))
             time.sleep(2)
             return False
 
         if len(passW) < 8:
-            outputLine()
+            line()
             print(errorColor("New password must be at least 8 characters long ⚠️"))
             time.sleep(2)
             return False
 
         if not any(char.isdigit() for char in passW):
-            outputLine()
+            line()
             print(errorColor("New password must contain at least one digit 🔢"))
             time.sleep(2)
             return False
 
         if not any(char in string.punctuation for char in passW):
-            outputLine()
+            line()
             print(errorColor("New password must contain at least one special character ❗"))
             time.sleep(2)
             return False
 
         if not any(char.isalpha() for char in passW):
-            outputLine()
+            line()
             print(errorColor("New password must contain at least one alphabet character 🔠"))
             time.sleep(2)
             return False
 
         confirmPass = getpass.getpass(inputColor("Confirm your password ✅ : "))
-        outputLine()
+        line()
 
         if passW != confirmPass:
             print(errorColor("Passwords do not match ❌"))
@@ -60,7 +60,7 @@ def registerUser():
 
         try:
             client     = pym.MongoClient(dbAddress)
-            database   = client["RuVMultitoolv1"]
+            database   = client["RuV_Tools"]
             collection = database["Auth"]
             document   = collection.find_one({"username": username})
 
@@ -83,28 +83,28 @@ def registerUser():
 
     except KeyboardInterrupt:
         print("\n")
-        outputLine()
+        line()
         print(errorColor("⛔ Operation cancelled by user (Ctrl+C)"))
         return False
 
 def loginUser():
     try:
-        outputLine()
+        line()
         username = input(inputColor("Enter your username 🧑‍💻 : ")).lower()
         passW    = getpass.getpass(inputColor("Enter your password 🔒 : "))
 
         if not username or not passW:
-            outputLine()
+            line()
             print(errorColor("Username or Password cannot be empty ❗"))
             time.sleep(2)
             return False
 
-        outputLine()
+        line()
         password = hashPassword(passW)
 
         try:
             client     = pym.MongoClient(dbAddress)
-            database   = client["RuVMultitoolv1"]
+            database   = client["RuV_Tools"]
             collection = database["Auth"]
             document   = collection.find_one({"username": username, "password": password})
 
@@ -127,18 +127,18 @@ def loginUser():
 
     except KeyboardInterrupt:
         print("\n")
-        outputLine()
+        line()
         print(errorColor("⛔ Operation cancelled by user (Ctrl+C)"))
         return False
 
 def changePassword():
     try:
-        outputLine()
+        line()
         username = input(inputColor("Enter your username 🧑‍💻 : ")).lower()
         oldPass  = getpass.getpass(inputColor("Enter your password 🔒 : "))
 
         if not username or not oldPass:
-            outputLine()
+            line()
             print(errorColor("Username or Password cannot be empty ❗"))
             time.sleep(2)
             return False
@@ -147,40 +147,40 @@ def changePassword():
 
         try:
             client     = pym.MongoClient(dbAddress)
-            database   = client["RuVMultitoolv1"]
+            database   = client["RuV_Tools"]
             collection = database["Auth"]
             document   = collection.find_one({"username": username, "password": oldPasswordHash})
 
             if document:
-                outputLine()
+                line()
                 newPass = getpass.getpass(inputColor("Enter your new password 🔐 : "))
 
                 if len(newPass) < 8:
-                    outputLine()
+                    line()
                     print(errorColor("New password must be at least 8 characters long ⚠️"))
                     time.sleep(2)
                     return False
 
                 if not any(char.isdigit() for char in newPass):
-                    outputLine()
+                    line()
                     print(errorColor("New password must contain at least one digit 🔢"))
                     time.sleep(2)
                     return False
 
                 if not any(char in string.punctuation for char in newPass):
-                    outputLine()
+                    line()
                     print(errorColor("New password must contain at least one special character ❗"))
                     time.sleep(2)
                     return False
 
                 if not any(char.isalpha() for char in newPass):
-                    outputLine()
+                    line()
                     print(errorColor("New password must contain at least one alphabet character 🔠"))
                     time.sleep(2)
                     return False
 
                 confirmPass = getpass.getpass(inputColor("Confirm your new password ✅ : "))
-                outputLine()
+                line()
 
                 if newPass != confirmPass:
                     print(errorColor("New passwords do not match ❌"))
@@ -212,7 +212,7 @@ def changePassword():
 
     except KeyboardInterrupt:
         print("\n")
-        outputLine()
+        line()
         print(errorColor("⛔ Operation cancelled by user (Ctrl+C)"))
         return False
 

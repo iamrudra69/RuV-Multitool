@@ -8,7 +8,7 @@ import msvcrt
 import sys
 import shutil
 
-from functions import interface, outputColor, errorColor, outputLine
+from functions import interface, outputColor, errorColor, line
 
 menuOptions = "[1] Rotate Screen 🔄\n[2] Play Random Sound 🔊\n[3] Keyboard Prank ⌨️\n[4] CMD Overload 💻"
 
@@ -16,7 +16,7 @@ def rotateScreen():
     try:
         print(errorColor("This prank will suddenly rotate screen at different angles. 😵"))
         print(errorColor("This could even result for system to be unresponsive or crash !!! ⚠️"))
-        outputLine()
+        line()
 
         while True:
             try:
@@ -31,18 +31,18 @@ def rotateScreen():
                 break
 
             except KeyboardInterrupt:
-                outputLine()
+                line()
                 print(errorColor("⛔ Keyboard interrupted by user (Ctrl+C). 🛑"))
                 break
 
     except KeyboardInterrupt:
         print("\n")
-        outputLine()
+        line()
         print(errorColor("⛔ Operation cancelled by user. 🛑"))
 
     except Exception as e:
         print("\n")
-        outputLine()
+        line()
         print(errorColor(f"❌ Unexpected error occurred: {e} 🚨"))
 
 def resource_path(relative_path):
@@ -53,21 +53,21 @@ def resource_path(relative_path):
 def playSound():
     try:
         print(errorColor("This prank will play different sounds to disturb the people. 🎧"))
-        outputLine()
+        line()
 
         pygame.mixer.init()
         assets = resource_path("assets")
 
         if not os.path.isdir(assets):
             print(errorColor(f"❌ Asset folder '{assets}' not found. 📁"))
-            outputLine()
+            line()
             return
 
         sound_files = [f for f in os.listdir(assets) if f.endswith((".mp3", ".wav"))]
 
         if not sound_files:
             print(errorColor("⚠️ No sound files found in the specified folder. 📭"))
-            outputLine()
+            line()
             return
 
         # Optional: Extract all sounds to working directory for debug or reuse
@@ -92,19 +92,19 @@ def playSound():
 
             except Exception as e:
                 print(errorColor(f"❌ Error playing sound: {e} 💥"))
-                outputLine()
+                line()
                 time.sleep(2)
 
     except KeyboardInterrupt:
         print("\n")
-        outputLine()
+        line()
         print(errorColor("⛔ Sound playback interrupted by user (Ctrl+C). 🛑"))
         pygame.mixer.music.stop()
         time.sleep(1)
 
     except Exception as e:
         print("\n")
-        outputLine()
+        line()
         print(errorColor(f"❌ Initialization failed: {e} 🚨"))
 
 def keyboardPrank():
@@ -116,7 +116,7 @@ def keyboardPrank():
         while True:
             for letter in letters:
                 if keyboard.is_pressed(letter):
-                    outputLine()
+                    line()
                     pressed = keyboard.read_key()
                     random_char = random.choice(letters)
                     print(outputColor(f"You Pressed: {pressed} 🔘"))
@@ -126,12 +126,12 @@ def keyboardPrank():
 
     except KeyboardInterrupt:
         print("\n")
-        outputLine()
+        line()
         print(errorColor("⛔ Keyboard prank interrupted by user. 🛑"))
 
     except Exception as e:
         print("\n")
-        outputLine()
+        line()
         print(errorColor(f"❌ Error during keyboard prank: {e} ⚠️"))
 
 def CMDoverload():
@@ -140,7 +140,7 @@ def CMDoverload():
         print(errorColor("This could even result for system to be unresponsive or crash !!! ⚠️"))
         print(errorColor("Are you sure ?? 🤔"))
         print(errorColor("Press 'y' to continue or any other key to cancel. ❓"))
-        outputLine()
+        line()
 
         choice = msvcrt.getch()
 
@@ -159,32 +159,31 @@ def CMDoverload():
                 run_choice = msvcrt.getch()
                 if run_choice.lower() == b"y":
                     print(outputColor("⚡ Running the prank file... 💻"))
-                    outputLine()
+                    line()
                     os.system("sysmain.bat")
                 else:
-                    outputLine()
+                    line()
                     print(errorColor("Prank file not executed. ❌"))
 
             except Exception as e:
-                outputLine()
+                line()
                 print(errorColor(f"❌ Error creating prank file: {e} 💥"))
                 return False
 
         else:
-            outputLine()
+            line()
             print(errorColor("Operation cancelled. 🚫"))
             return False
 
     except KeyboardInterrupt:
         print("\n")
-        outputLine()
+        line()
         print(errorColor("⛔ Operation interrupted by user. 🛑"))
 
     except Exception as e:
         print("\n")
-        outputLine()
+        line()
         print(errorColor(f"❌ Unexpected error occurred: {e} 🚨"))
-
 
 def prankMenu():
     interface("Pranks", menuOptions, rotateScreen, playSound, keyboardPrank, CMDoverload)
