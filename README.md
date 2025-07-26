@@ -56,7 +56,7 @@
 <img width="1069" height="571" alt="3" src="https://github.com/user-attachments/assets/9474b8af-4380-45d6-8493-1365355c1c55" />
 
 ### 🕹️ Basic Operations Menu
-
+<img width="1115" height="628" alt="basic menu" src="https://github.com/user-attachments/assets/c6ab0419-4725-4cea-8587-5a53416f00cb" />
 
 ### 📁 File Operations Menu
 <img width="1115" height="628" alt="4" src="https://github.com/user-attachments/assets/b0814e7f-7344-4266-8de0-7edc8dd3f722" />
