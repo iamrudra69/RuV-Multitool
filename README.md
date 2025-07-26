@@ -110,7 +110,7 @@ RuV-Multitool-v1/
 ### Requirements
 
 - Python 3.8 or higher
-- OS: Windows, Linux, macOS (Windows recommended for full prank support)
+- OS: Windows (Windows 11 recommended for Best UI and Experience)
 
 ### Steps
 
@@ -137,7 +137,6 @@ python main.py
 
 ## 🧪 Planned Features
 
-- GUI Version using **Tkinter** or **PyQt**
 - Logging system (debug + user logs)
 - Password encryption & hash storage
 - Add file zip/delete/move features
@@ -157,9 +156,6 @@ This project is licensed under the **MIT License**. You're free to use, modify, 
 ## 🙋‍♂️ Author & Credits
 
 Developed by [@VoldRax](https://github.com/VoldRax) — contributions welcome!
-
-> ASCII banners powered by **pyfiglet**  
-> Colorful CLI interface using **termcolor**
 
 ---
 
