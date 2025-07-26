@@ -3,15 +3,26 @@ import random
 import msvcrt
 import time 
 from pyfiglet import Figlet
-import os
-import sys
-import pygame
-import shutil
+import tempfile
+import subprocess
 
 from functions import interface ,inputColor, outputColor, errorColor, line, cls
 
-
 menuOptions = "[1] Get currency exchange rate 💱\n[2] Generate a password 🔐\n[3] Use Timer ⏰"
+
+asciiDigits = {
+    "0": [" ██████ ", "██    ██", "██    ██", "██    ██", " ██████ "],
+    "1": ["   ██   ", " ████   ", "   ██   ", "   ██   ", " ██████ "],
+    "2": [" ██████ ", "     ██ ", " ██████ ", "██      ", "███████ "],
+    "3": [" ██████ ", "     ██ ", " ██████ ", "     ██ ", " ██████ "],
+    "4": ["██   ██ ", "██   ██ ", "███████ ", "     ██ ", "     ██ "],
+    "5": ["███████ ", "██      ", "██████  ", "     ██ ", "██████  "],
+    "6": [" ██████ ", "██      ", "██████  ", "██   ██ ", " ██████ "],
+    "7": ["███████ ", "     ██ ", "    ██  ", "   ██   ", "  ██    "],
+    "8": [" ██████ ", "██   ██ ", " ██████ ", "██   ██ ", " ██████ "],
+    "9": [" ██████ ", "██   ██ ", " ██████ ", "     ██ ", " ██████ "],
+    ":": ["        ", "   ██   ", "        ", "   ██   ", "        "]
+}
 
 def fetchExchangeRates(currencyCode):
     url = f"https://v6.exchangerate-api.com/v6/ac60b2859a97d9cdf969f829/latest/{currencyCode}"
@@ -67,95 +78,57 @@ def getCurrencyRates():
 
 def passwordGenerator():
 
-    characters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&-_1234567890")
+    characters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%=+*><&-_1234567890")
     
     try:
-        line()
+
+        line()  
         passLen = int(input(inputColor("Enter the password length (8 characters by default) 🔐 : "))) or 8
         password = ""
+       
+        if passLen > 256:
+            line()
+            print(errorColor("❌ Password length could not be more than 256 characters !!!"))
 
-        for i in range(passLen):
-            password += random.choice(characters)
-        line()
-        
-        print(inputColor("Press y to save password in a file or any key to cancel"))
-        saveAsFile = msvcrt.getch().lower()
-    
-        if saveAsFile == b'y':
-            try:
-                line()
-                with open("password.txt", "w+") as f:
-                    f.write(f"password : {password}")
-                    print(outputColor(f"password : {password}"))
-                    print(outputColor("File written successfully!"))
-            except Exception as e:
-                print(errorColor(f"An Error Occured writing file ! : {e}"))
+        else:
+            for i in range(passLen):
+                password += random.choice(characters)
             
+            line()
+            print(outputColor(f"password : {password}"))
+            
+            line()
+            print(inputColor("Press y to save password in a file or any key to cancel"))
+            
+            saveAsFile = msvcrt.getch().lower()
         
-    except Exception as e:
-        print(errorColor(f"An Error Occured ! : {e}"))
-
-def resource_path(relative_path):
-    # Works whether it's a script or a bundled .exe
-    base_path = getattr(sys, '_MEIPASS', os.path.abspath("."))
-    return os.path.join(base_path, relative_path)
-
-def playSound():
-    try:
-        # print(errorColor("This prank will play different sounds to disturb the people. 🎧"))
-        line()
-
-        pygame.mixer.init()
-        assets = resource_path("assets")
-
-        if not os.path.isdir(assets):
-            print(errorColor(f"❌ Asset folder '{assets}' not found. 📁"))
+            if saveAsFile == b'y':
+                try:
+                    line()
+                    with open("password.txt", "w+") as f:
+                        f.write(f"password : {password}")
+                        print(outputColor("File written successfully!"))
+                except Exception as e:
+                    print(errorColor(f"❌ An Error Occured writing file ! : {e}"))
+            else:
+                print(outputColor("❌ Password not written in the file !"))    
+    
+    except ValueError:
             line()
-            return
-
-        sound_files = [f for f in os.listdir(assets) if f.endswith((".mp3", ".wav"))]
-
-        if not sound_files:
-            print(errorColor("⚠️ No sound files found in the specified folder. 📭"))
-            line()
-            return
-
-        # Optional: Extract all sounds to working directory for debug or reuse
-        extract_dir = os.path.join(os.getcwd(), "extracted_sounds")
-        os.makedirs(extract_dir, exist_ok=True)
-        for f in sound_files:
-            shutil.copyfile(os.path.join(assets, f), os.path.join(extract_dir, f))
-
-        while True:
-            try:
-                sound = random.choice(sound_files)
-                full_path = os.path.join(assets, sound)
-                pygame.mixer.music.load(full_path)
-                pygame.mixer.music.play()
-
-                print(outputColor(f"🔊 Playing: {sound} 🎶"))
-
-                while pygame.mixer.music.get_busy():
-                    time.sleep(1)
-
-                time.sleep(random.randint(1, 5))
-
-            except Exception as e:
-                print(errorColor(f"❌ Error playing sound: {e} 💥"))
-                line()
-                time.sleep(2)
-
-    except KeyboardInterrupt:
-        print("\n")
-        line()
-        print(errorColor("⛔ Sound playback interrupted by user (Ctrl+C). 🛑"))
-        pygame.mixer.music.stop()
-        time.sleep(1)
+            print(errorColor(f"❌ Invalid input the given input is not an integer!"))
 
     except Exception as e:
-        print("\n")
         line()
-        print(errorColor(f"❌ Initialization failed: {e} 🚨"))
+        print(errorColor(f"❌ An Error Occured ! : {e}"))
+
+def printAsciiTime(h, m, s):
+    time_str = f"{h:02}:{m:02}:{s:02}"
+    rows = [""] * 5
+    for ch in time_str:
+        for i in range(5):
+            rows[i] += asciiDigits[ch][i] + "  "
+    for row in rows:
+        print(outputColor(row))
 
 def timer():
 
@@ -164,7 +137,6 @@ def timer():
     minutes = int(input(inputColor(f"Enter the time in minutes : ")))
     seconds = int(input(inputColor(f"Enter the time in seconds : ")))
     line()
-    f = Figlet(font='big')
 
     if seconds >= 60:
         minutes += seconds // 60
@@ -175,6 +147,7 @@ def timer():
         minutes %= 60   
 
     totalTime = (hours * 3600) + (minutes * 60) + seconds
+    
     try :
         while totalTime > -1:
             
@@ -187,20 +160,35 @@ def timer():
 
             cls()
             
-            formattedTime = f.renderText(f"{hours} : {minutes} : {seconds}")
-            print(outputColor(formattedTime))
+            printAsciiTime(f"{hours:02}", f"{minutes:02}", f"{seconds:02}")
 
             totalTime -= 1 
             seconds -= 1
             time.sleep(1)
 
+        line()
         print(errorColor("Press (Ctrl+C) on the Keyboard to Stop. 🛑"))
-        playSound()
+        line()
+        
+        writeAbleText = "🆃🅸🅼🅴 🅵🅸🅽🅸🆂🅷🅴🅳"
+
+        while True:
+
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".txt", mode='w', encoding='utf-8') as temp_file:
+                temp_file.write(writeAbleText)
+                temp_path = temp_file.name
+
+            subprocess.Popen(["notepad.exe", temp_path])
+            print(outputColor("It will open again in 10 seconds !"))
+            time.sleep(10)
+
 
     except Exception as e:
+        line()
         print(errorColor(e))
 
     except KeyboardInterrupt:
+        line()
         print(errorColor("⛔ Keyboard interrupted by user (Ctrl+C). 🛑"))
 
 def basicOpsMenu():
