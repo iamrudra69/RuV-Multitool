@@ -22,6 +22,7 @@
 - **Rename files** easily via the interface
 - **Download files** from a specified path or location
 - **Search files** from a folder with extensions
+- **CSV TO JSON** converts csv data to json format
 - Designed to be expandable (move, delete, zip etc. possible in future versions)
 
 ### 🖥️ System Utilities
@@ -53,13 +54,13 @@
 <img width="1069" height="571" alt="2" src="https://github.com/user-attachments/assets/a504a41b-bc2e-4d2b-942c-884286a201c2" />
 
 ### 🧩 Selection Menu (Main Tools)
-<img width="1069" height="571" alt="3" src="https://github.com/user-attachments/assets/9474b8af-4380-45d6-8493-1365355c1c55" />
+<img width="1115" height="628" alt="selectionMenu" src="https://github.com/user-attachments/assets/0cdf0661-8085-46d0-992c-796a72926eb9" />
 
 ### 🕹️ Basic Operations Menu
-
+<img width="1115" height="628" alt="basic menu" src="https://github.com/user-attachments/assets/c6ab0419-4725-4cea-8587-5a53416f00cb" />
 
 ### 📁 File Operations Menu
-<img width="1115" height="628" alt="4" src="https://github.com/user-attachments/assets/b0814e7f-7344-4266-8de0-7edc8dd3f722" />
+<img width="1115" height="628" alt="file menu" src="https://github.com/user-attachments/assets/792a3712-fcfc-42cc-b49a-a25257034d58" />
 
 ### 🤪 Pranks Menu (For Fun)
 <img width="1069" height="571" alt="5" src="https://github.com/user-attachments/assets/53cbe053-fe7f-434f-81a5-0fe73235d187" />
@@ -110,7 +111,7 @@ RuV-Multitool-v1/
 ### Requirements
 
 - Python 3.8 or higher
-- OS: Windows, Linux, macOS (Windows recommended for full prank support)
+- OS: Windows (Windows 11 recommended for Best UI and Experience)
 
 ### Steps
 
@@ -137,7 +138,6 @@ python main.py
 
 ## 🧪 Planned Features
 
-- GUI Version using **Tkinter** or **PyQt**
 - Logging system (debug + user logs)
 - Password encryption & hash storage
 - Add file zip/delete/move features
@@ -157,9 +157,6 @@ This project is licensed under the **MIT License**. You're free to use, modify, 
 ## 🙋‍♂️ Author & Credits
 
 Developed by [@VoldRax](https://github.com/VoldRax) — contributions welcome!
-
-> ASCII banners powered by **pyfiglet**  
-> Colorful CLI interface using **termcolor**
 
 ---
 
