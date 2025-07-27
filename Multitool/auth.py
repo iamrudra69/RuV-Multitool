@@ -1,4 +1,4 @@
-import pymongo as pym 
+import pymongo as pym
 import getpass
 import hashlib
 import time
@@ -7,79 +7,91 @@ import string
 from functions import interface, inputColor, outputColor, errorColor, line
 
 menuOptions = "[1] Register User 📝\n[2] Login 🔑\n[3] Change Password 🔄"
-dbAddress   = "mongodb://localhost:27017/"
+dbAddress = "mongodb://localhost:27017/"
+
+
+def passwordChecks(password):
+
+    if len(password) < 8:
+        line()
+        print(errorColor("New password must be at least 8 characters long ⚠️"))
+        time.sleep(2)
+        return False
+
+    if not any(char.isdigit() for char in password):
+        line()
+        print(errorColor("New password must contain at least one digit 🔢"))
+        time.sleep(2)
+        return False
+
+    if not any(char in string.punctuation for char in password):
+        line()
+        print(errorColor("New password must contain at least one special character ❗"))
+        time.sleep(2)
+        return False
+
+    if not any(char.isalpha() for char in password):
+        line()
+        print(
+            errorColor("New password must contain at least one alphabet character 🔠")
+        )
+        time.sleep(2)
+        return False
+
+    return True
+
 
 def hashPassword(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
+
 def registerUser():
+
     try:
         line()
         username = input(inputColor("Enter your username 🧑‍💻 : ")).lower()
-        passW    = getpass.getpass(inputColor("Enter your password 🔒 : "))
+        rawPassword = getpass.getpass(inputColor("Enter your password 🔒 : "))
 
-        if not username or not passW:
+        if not username or not rawPassword:
             line()
             print(errorColor("Username or Password cannot be empty ❗"))
             time.sleep(2)
             return False
 
-        if len(passW) < 8:
+        if passwordChecks(rawPassword) == True:
+
+            confirmPass = getpass.getpass(inputColor("Confirm your password ✅ : "))
             line()
-            print(errorColor("New password must be at least 8 characters long ⚠️"))
-            time.sleep(2)
-            return False
 
-        if not any(char.isdigit() for char in passW):
-            line()
-            print(errorColor("New password must contain at least one digit 🔢"))
-            time.sleep(2)
-            return False
-
-        if not any(char in string.punctuation for char in passW):
-            line()
-            print(errorColor("New password must contain at least one special character ❗"))
-            time.sleep(2)
-            return False
-
-        if not any(char.isalpha() for char in passW):
-            line()
-            print(errorColor("New password must contain at least one alphabet character 🔠"))
-            time.sleep(2)
-            return False
-
-        confirmPass = getpass.getpass(inputColor("Confirm your password ✅ : "))
-        line()
-
-        if passW != confirmPass:
-            print(errorColor("Passwords do not match ❌"))
-            time.sleep(2)
-            return False
-
-        password = hashPassword(passW)
-
-        try:
-            client     = pym.MongoClient(dbAddress)
-            database   = client["RuV_Tools"]
-            collection = database["Auth"]
-            document   = collection.find_one({"username": username})
-
-            print("\033[38;5;27mConnecting to the Server !\033[0m")
-            time.sleep(2)
-            print("\033[38;5;45mConnection successful!\033[0m")
-            time.sleep(1)
-
-            if document:
-                print(errorColor("User already exists ❗"))
+            if rawPassword != confirmPass:
+                print(errorColor("Passwords do not match ❌"))
+                time.sleep(2)
                 return False
 
-            collection.insert_one({"username": username, "password": password})
-            print(outputColor("Registration successful ✅"))
-            return True
+            password = hashPassword(rawPassword)
 
-        except Exception as e:
-            print(errorColor(f"An error occurred: {e} ❌"))
-            return False
+            try:
+                client = pym.MongoClient(dbAddress)
+                database = client["RuV_Tools"]
+                collection = database["Auth"]
+                document = collection.find_one({"username": username})
+
+                print("\033[38;5;27mConnecting to the Server !\033[0m")
+                time.sleep(2)
+                print("\033[38;5;45mConnection successful!\033[0m")
+                time.sleep(1)
+
+                if document:
+                    print(errorColor("User already exists ❗"))
+                    return False
+
+                collection.insert_one({"username": username, "password": password})
+                print(outputColor("Registration successful ✅"))
+                return True
+
+            except Exception as e:
+                print(errorColor(f"An error occurred: {e} ❌"))
+                return False
 
     except KeyboardInterrupt:
         print("\n")
@@ -87,26 +99,28 @@ def registerUser():
         print(errorColor("⛔ Operation cancelled by user (Ctrl+C)"))
         return False
 
+
 def loginUser():
+
     try:
         line()
         username = input(inputColor("Enter your username 🧑‍💻 : ")).lower()
-        passW    = getpass.getpass(inputColor("Enter your password 🔒 : "))
+        rawPassword = getpass.getpass(inputColor("Enter your password 🔒 : "))
 
-        if not username or not passW:
+        if not username or not rawPassword:
             line()
             print(errorColor("Username or Password cannot be empty ❗"))
             time.sleep(2)
             return False
 
         line()
-        password = hashPassword(passW)
+        password = hashPassword(rawPassword)
 
         try:
-            client     = pym.MongoClient(dbAddress)
-            database   = client["RuV_Tools"]
+            client = pym.MongoClient(dbAddress)
+            database = client["RuV_Tools"]
             collection = database["Auth"]
-            document   = collection.find_one({"username": username, "password": password})
+            document = collection.find_one({"username": username, "password": password})
 
             print("\033[38;5;27mConnecting to the Server !\033[0m")
             time.sleep(2)
@@ -131,11 +145,12 @@ def loginUser():
         print(errorColor("⛔ Operation cancelled by user (Ctrl+C)"))
         return False
 
+
 def changePassword():
     try:
         line()
         username = input(inputColor("Enter your username 🧑‍💻 : ")).lower()
-        oldPass  = getpass.getpass(inputColor("Enter your password 🔒 : "))
+        oldPass = getpass.getpass(inputColor("Enter your password 🔒 : "))
 
         if not username or not oldPass:
             line()
@@ -146,57 +161,41 @@ def changePassword():
         oldPasswordHash = hashPassword(oldPass)
 
         try:
-            client     = pym.MongoClient(dbAddress)
-            database   = client["RuV_Tools"]
+            client = pym.MongoClient(dbAddress)
+            database = client["RuV_Tools"]
             collection = database["Auth"]
-            document   = collection.find_one({"username": username, "password": oldPasswordHash})
+            document = collection.find_one(
+                {"username": username, "password": oldPasswordHash}
+            )
 
             if document:
                 line()
                 newPass = getpass.getpass(inputColor("Enter your new password 🔐 : "))
 
-                if len(newPass) < 8:
+                if passwordChecks(newPass) == True:
+
+                    confirmPass = getpass.getpass(
+                        inputColor("Confirm your new password ✅ : ")
+                    )
                     line()
-                    print(errorColor("New password must be at least 8 characters long ⚠️"))
-                    time.sleep(2)
-                    return False
 
-                if not any(char.isdigit() for char in newPass):
-                    line()
-                    print(errorColor("New password must contain at least one digit 🔢"))
-                    time.sleep(2)
-                    return False
+                    if newPass != confirmPass:
+                        print(errorColor("New passwords do not match ❌"))
+                        time.sleep(2)
+                        return False
 
-                if not any(char in string.punctuation for char in newPass):
-                    line()
-                    print(errorColor("New password must contain at least one special character ❗"))
-                    time.sleep(2)
-                    return False
+                    newPasswordHash = hashPassword(newPass)
 
-                if not any(char.isalpha() for char in newPass):
-                    line()
-                    print(errorColor("New password must contain at least one alphabet character 🔠"))
-                    time.sleep(2)
-                    return False
-
-                confirmPass = getpass.getpass(inputColor("Confirm your new password ✅ : "))
-                line()
-
-                if newPass != confirmPass:
-                    print(errorColor("New passwords do not match ❌"))
-                    time.sleep(2)
-                    return False
-
-                newPasswordHash = hashPassword(newPass)
-
-                print("\033[38;5;27mConnecting to the Server !\033[0m")
-                time.sleep(1)
-                print("\033[38;5;45mConnection successful!\033[0m")
-                time.sleep(1)
-                print(outputColor("Password changed successfully 🔁"))
-                time.sleep(1)
-                collection.update_one({"username": username}, {"$set": {"password": newPasswordHash}})
-                return True
+                    print("\033[38;5;27mConnecting to the Server !\033[0m")
+                    time.sleep(1)
+                    print("\033[38;5;45mConnection successful!\033[0m")
+                    time.sleep(1)
+                    print(outputColor("Password changed successfully 🔁"))
+                    time.sleep(1)
+                    collection.update_one(
+                        {"username": username}, {"$set": {"password": newPasswordHash}}
+                    )
+                    return True
 
             else:
                 print("\033[38;5;27mConnecting to the Server !\033[0m")
@@ -215,6 +214,7 @@ def changePassword():
         line()
         print(errorColor("⛔ Operation cancelled by user (Ctrl+C)"))
         return False
+
 
 def authMenu():
     interface("Auth", menuOptions, registerUser, loginUser, changePassword)
